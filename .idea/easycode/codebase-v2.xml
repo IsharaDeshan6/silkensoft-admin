@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="com.obiscr.chatgpt.settings.EasyCodeState">
+    <option name="projectFiles" value="$PROJECT_DIR$/app/(admin)/(auth)/sign-in/page.tsx;D:/HDP2/silkensoft-admin/app/(admin)/(auth)/verify-account/page.tsx;D:/HDP2/silkensoft-admin/app/(admin)/(auth)/verify-email/page.tsx;D:/HDP2/silkensoft-admin/app/globals.css;D:/HDP2/silkensoft-admin/app/layout.tsx;D:/HDP2/silkensoft-admin/app/page.tsx;D:/HDP2/silkensoft-admin/components/ui/button.tsx;D:/HDP2/silkensoft-admin/components/ui/checkbox.tsx;D:/HDP2/silkensoft-admin/components/ui/dialog.tsx;D:/HDP2/silkensoft-admin/components/ui/Icons.tsx;D:/HDP2/silkensoft-admin/components/ui/input.tsx;D:/HDP2/silkensoft-admin/components/ui/label.tsx;D:/HDP2/silkensoft-admin/components/MaxWidthWrapper.tsx;D:/HDP2/silkensoft-admin/lib/utils.ts;D:/HDP2/silkensoft-admin/components.json;D:/HDP2/silkensoft-admin/next.config.ts;D:/HDP2/silkensoft-admin/package-lock.json;D:/HDP2/silkensoft-admin/package.json;D:/HDP2/silkensoft-admin/README.md;D:/HDP2/silkensoft-admin/tailwind.config.ts;D:/HDP2/silkensoft-admin/tsconfig.json" />
+  </component>
+</project>
