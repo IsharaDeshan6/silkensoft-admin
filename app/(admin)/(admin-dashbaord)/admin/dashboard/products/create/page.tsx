@@ -13,6 +13,7 @@ import { useCategories } from "@/hooks/useCategories";
 import { useModels } from "@/hooks/useModels";
 import { useColors } from "@/hooks/useColors";
 import useAddProduct from "@/hooks/useAddProduct";
+import Image from "next/image";
 
 export default function ProductCreateRoute() {
     const [images, setImages] = useState<(File | null)[]>([null, null]);
@@ -217,7 +218,7 @@ export default function ProductCreateRoute() {
                                                 onChange={(e) => handleImageChange(e, index)}
                                             />
                                             {images[index] && (
-                                                <img
+                                                <Image
                                                     src={URL.createObjectURL(images[index]!)}
                                                     alt={`Preview ${index + 1}`}
                                                     className="mt-2 w-full border border-gray-300"

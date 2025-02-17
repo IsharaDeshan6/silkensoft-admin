@@ -16,6 +16,7 @@ import { useColors } from "@/hooks/useColors";
 import { useSizes } from "@/hooks/useSizes";
 import useProduct from "@/hooks/useProduct";
 import useUpdateProduct from "@/hooks/useUpdateProduct";
+import Image from "next/image";
 
 export default function ProductUpdateRoute() {
     const [images, setImages] = useState<(File | null)[]>([null, null]);
@@ -247,7 +248,7 @@ export default function ProductUpdateRoute() {
                                                 onChange={(e) => handleImageChange(e, index)}
                                             />
                                             {imagePreviews[index] && (
-                                                <img
+                                                <Image
                                                     src={imagePreviews[index]}
                                                     alt={`Preview ${index + 1}`}
                                                     className="mt-2 w-full border border-gray-300"

@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import { useRouter } from 'next/navigation';
 import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,7 +7,13 @@ import useDeleteProduct from '@/hooks/useDeleteProduct';
 import { useAuth } from '@/context/AuthContext';
 import { useEffect } from 'react';
 
-export default function DeleteRoute({ params }: { params: { id: string } }) {
+interface PageProps {
+  params: Promise<{
+    id: string;
+  }>;
+}
+
+export default function DeleteRoute({ params }: PageProps) {
   const router = useRouter();
   const { deleteProduct, loading, error } = useDeleteProduct();
   const { isAuthenticated } = useAuth();
@@ -24,7 +30,8 @@ export default function DeleteRoute({ params }: { params: { id: string } }) {
 
   const handleDelete = async () => {
     try {
-      await deleteProduct(params.id);
+      const resolvedParams = await params;
+      await deleteProduct(resolvedParams.id);
       await router.push('/admin/dashboard/products');
     } catch (err) {
       console.error(err);

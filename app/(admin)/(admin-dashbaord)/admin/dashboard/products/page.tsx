@@ -5,13 +5,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { MoreHorizontal, PlusCircle } from "lucide-react";
 import Link from "next/link";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { useAuth } from "@/context/AuthContext";
 import { useProducts } from "@/hooks/useProducts";
 import useUpdateProductStatus from '@/hooks/useUpdateProductStatus';
+import Image from "next/image";
 
 export default function ProductsRoute() {
   const { products, loading, error, loadProducts } = useProducts();
@@ -20,7 +20,7 @@ export default function ProductsRoute() {
 
   useEffect(() => {
     loadProducts();
-  }, []);
+  }, [loadProducts]);
 
   if (!isAuthenticated) {
     return null; // or a loading spinner
@@ -73,9 +73,14 @@ export default function ProductsRoute() {
                 {products.map(product => (
                     <TableRow key={product.id}>
                       <TableCell>
-                        <Avatar>
-                          <AvatarImage src={`http://localhost:8080/SilkenSoft/images/clothes/${product.id}/img1.jpg?timestamp=${Date.now()}`} alt={product.title} />
-                        </Avatar>
+
+                          <Image src={`http://localhost:8080/SilkenSoft/images/clothes/${product.id}/img1.jpg`}
+                                 alt={product.title}
+                                 className="w-20 h-20 object-contain mr-2"
+                                 width={20}
+                                 height={20}
+                          />
+
                       </TableCell>
                       <TableCell>
                         <p className="font-medium">{product.title}</p>

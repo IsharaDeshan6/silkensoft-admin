@@ -8,6 +8,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useOrders } from "@/hooks/useOrders";
 import useUpdateOrderStatus from '@/hooks/useUpdateOrderStatus';
 import { toast } from 'sonner';
+import Image from "next/image";
 
 const statusOrder = ["Order Placed", "Order Success", "Shipped", "Delivered"];
 
@@ -35,7 +36,12 @@ export default function OrdersPage() {
 
     const handleStatusChange = async (orderId: string, status: string) => {
         const order = localOrders.find(order => order.id === orderId);
-        // @ts-ignore
+
+        if (!order) {
+            toast.error('Order not found.');
+            return;
+        }
+
         const currentStatusIndex = statusOrder.indexOf(order.orderStatus.name);
         const newStatusIndex = statusOrder.indexOf(status);
 
@@ -86,8 +92,14 @@ export default function OrdersPage() {
                                     <TableCell>
                                         {order.orderItems.map(item => (
                                             <Card key={item.id} className="mb-4">
-                                                <CardContent className="flex items-center">
-                                                    <img src={`http://localhost:8080/SilkenSoft/images/clothes/${item.product.id}/img1.jpg?timestamp=${Date.now()}`} alt={item.product.title} className="w-16 h-16 mr-4"/>
+                                                <CardContent className="flex items-center gap-x-2 justify-start pt-4">
+                                                        <Image
+                                                            src={`http://localhost:8080/SilkenSoft/images/clothes/${item.product.id}/img1.jpg?timestamp=${Date.now()}`}
+                                                            alt={item.product.title}
+                                                            className="w-16 h-16 object-contain mr-2"
+                                                            width={16}
+                                                            height={16}
+                                                        />
                                                     <div>
                                                         <p className="font-medium">{item.product.title}</p>
                                                         <p>Qty: {item.qty}</p>
