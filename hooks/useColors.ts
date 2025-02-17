@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 interface Color {
     id: number;
     name: string;
-    hex: string;
+    colorHex: string;
 }
 
 export const useColors = () => {

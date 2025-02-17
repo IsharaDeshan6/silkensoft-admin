@@ -24,13 +24,17 @@ import {
 } from "@/components/ui/pagination";
 import {useAuth} from "@/context/AuthContext";
 import {useColors} from "@/hooks/useColors";
+import useAddColor from "@/hooks/useAddColor";
 
 const Page =()=> {
-
     const [openColorDialog, setOpenColorDialog] = useState(false);
+    const [colorName, setColorName] = useState("");
+    const [colorHex, setColorHex] = useState("");
+    const [nameError, setNameError] = useState("");
+    const [hexError, setHexError] = useState("");
     const { colors, loading, error } = useColors();
     const { isAuthenticated } = useAuth();
-
+    const { addColor, isLoading } = useAddColor();
 
     if (!isAuthenticated) {
         return null; // or a loading spinner
@@ -43,6 +47,27 @@ const Page =()=> {
     if (error) {
         return <div>{error}</div>;
     }
+
+    const handleSave = async () => {
+        let hasError = false;
+        if (!colorName) {
+            setNameError('Please enter a color name');
+            hasError = true;
+        } else {
+            setNameError('');
+        }
+        if (!colorHex) {
+            setHexError('Please enter a color hex');
+            hasError = true;
+        } else {
+            setHexError('');
+        }
+        if (hasError) {
+            return;
+        }
+        await addColor({ name: colorName, colorHex });
+        setOpenColorDialog(false);
+    };
 
     return (
         <>
@@ -138,16 +163,26 @@ const Page =()=> {
                             type="text"
                             placeholder="Color Name"
                             className="col-span-3"
+                            value={colorName}
+                            onChange={(e) => setColorName(e.target.value)}
                         />
+                        {nameError && <p className="text-red-500 text-left">{nameError}</p>}
+                    </div>
+                    <div className="grid gap-4 py-2">
                         <Label>Hexadecimal Value</Label>
                         <Input
                             type="text"
                             placeholder="#FFFFFF"
                             className="col-span-3"
+                            value={colorHex}
+                            onChange={(e) => setColorHex(e.target.value)}
                         />
+                        {hexError && <p className="text-red-500 text-left">{hexError}</p>}
                     </div>
                     <DialogFooter>
-                        <Button className='w-full'>Save</Button>
+                        <Button className='w-full' onClick={handleSave} disabled={isLoading}>
+                            {isLoading ? 'Saving...' : 'Save'}
+                        </Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>

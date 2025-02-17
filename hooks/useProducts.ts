@@ -41,13 +41,12 @@ export const useProducts = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    useEffect(() => {
-        const fetchProducts = async () => {
+        const loadProducts = async () => {
             try {
                 const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}LoadAllProducts`);
                 const data = await response.json();
                 if (data.message === 'success') {
-                    setProducts(data.products);
+                    setProducts(data.allProducts);
                 } else {
                     setError('Failed to load products');
                 }
@@ -58,8 +57,9 @@ export const useProducts = () => {
             }
         };
 
-        fetchProducts();
+    useEffect(() => {
+        loadProducts();
     }, []);
 
-    return { products, loading, error };
+    return { products, loading, error,loadProducts };
 };

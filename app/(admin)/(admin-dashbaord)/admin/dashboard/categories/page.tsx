@@ -25,13 +25,17 @@ import {
 } from "@/components/ui/pagination";
 import {useCategories} from "@/hooks/useCategories";
 import {useAuth} from "@/context/AuthContext";
+import useAddCategory from "@/hooks/useAddCategory";
 
 const Page =()=> {
-
     const [openCategoryDialog, setOpenCategoryDialog] = useState(false);
+    const [categoryName, setCategoryName] = useState("");
+    const [categoryImage, setCategoryImage] = useState<File | null>(null);
+    const [nameError, setNameError] = useState("");
+    const [imageError, setImageError] = useState("");
     const { categories, loading, error } = useCategories();
     const { isAuthenticated } = useAuth();
-
+    const { addCategory, isLoading } = useAddCategory();
 
     if (!isAuthenticated) {
         return null; // or a loading spinner
@@ -44,6 +48,27 @@ const Page =()=> {
     if (error) {
         return <div>{error}</div>;
     }
+
+    const handleSave = async () => {
+        let hasError = false;
+        if (!categoryName) {
+            setNameError('Please enter a category name');
+            hasError = true;
+        } else {
+            setNameError('');
+        }
+        if (!categoryImage) {
+            setImageError('Please select a category image');
+            hasError = true;
+        } else {
+            setImageError('');
+        }
+        if (hasError) {
+            return;
+        }
+        await addCategory({ name: categoryName, image: categoryImage });
+        setOpenCategoryDialog(false);
+    };
 
     return (
         <>
@@ -131,17 +156,24 @@ const Page =()=> {
                             type="text"
                             placeholder="Category Name"
                             className="col-span-3"
+                            value={categoryName}
+                            onChange={(e) => setCategoryName(e.target.value)}
                         />
+                        {nameError && <p className="text-red-500 text-left">{nameError}</p>}
                     </div>
                     <div className="grid gap-4">
                         <Label>Category Image</Label>
                         <Input
                             type="file"
                             className="col-span-3"
+                            onChange={(e) => setCategoryImage(e.target.files ? e.target.files[0] : null)}
                         />
+                        {imageError && <p className="text-red-500 text-left">{imageError}</p>}
                     </div>
                     <DialogFooter>
-                        <Button className='w-full' >Save</Button>
+                        <Button className='w-full' onClick={handleSave} disabled={isLoading}>
+                            {isLoading ? 'Saving...' : 'Save'}
+                        </Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>

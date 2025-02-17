@@ -24,13 +24,15 @@ import {
 } from "@/components/ui/pagination";
 import {useAuth} from "@/context/AuthContext";
 import {useModels} from "@/hooks/useModels";
+import useAddModel from "@/hooks/useAddModel";
 
 const Page =()=> {
-
     const [openModelDialog, setOpenModelDialog] = useState(false);
+    const [modelName, setModelName] = useState("");
+    const [nameError, setNameError] = useState("");
     const { models, loading, error } = useModels();
     const { isAuthenticated } = useAuth();
-
+    const { addModel, isLoading } = useAddModel();
 
     if (!isAuthenticated) {
         return null; // or a loading spinner
@@ -43,6 +45,17 @@ const Page =()=> {
     if (error) {
         return <div>{error}</div>;
     }
+
+    const handleSave = async () => {
+        if (!modelName) {
+            setNameError('Please enter a model name');
+            return;
+        }
+        setNameError('');
+        await addModel({ name: modelName });
+        setOpenModelDialog(false);
+    };
+
     return (
         <>
             <div className="flex items-center justify-end">
@@ -123,10 +136,15 @@ const Page =()=> {
                             type="text"
                             placeholder="Model Name"
                             className="col-span-3"
+                            value={modelName}
+                            onChange={(e) => setModelName(e.target.value)}
                         />
+                        {nameError && <p className="text-red-500 text-left">{nameError}</p>}
                     </div>
                     <DialogFooter>
-                        <Button className='w-full' >Save</Button>
+                        <Button className='w-full' onClick={handleSave} disabled={isLoading}>
+                            {isLoading ? 'Saving...' : 'Save'}
+                        </Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
