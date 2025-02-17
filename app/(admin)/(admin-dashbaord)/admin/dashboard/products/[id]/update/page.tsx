@@ -249,6 +249,8 @@ export default function ProductUpdateRoute() {
                                             />
                                             {imagePreviews[index] && (
                                                 <Image
+                                                    width={200}
+                                                    height={200}
                                                     src={imagePreviews[index]}
                                                     alt={`Preview ${index + 1}`}
                                                     className="mt-2 w-full border border-gray-300"

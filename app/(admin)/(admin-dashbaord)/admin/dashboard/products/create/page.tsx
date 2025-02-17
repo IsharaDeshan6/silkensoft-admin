@@ -219,6 +219,8 @@ export default function ProductCreateRoute() {
                                             />
                                             {images[index] && (
                                                 <Image
+                                                    width={200}
+                                                    height={200}
                                                     src={URL.createObjectURL(images[index]!)}
                                                     alt={`Preview ${index + 1}`}
                                                     className="mt-2 w-full border border-gray-300"
