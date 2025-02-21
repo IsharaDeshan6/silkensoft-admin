@@ -35,7 +35,7 @@ export default function ProductCreateRoute() {
     const { colors, loading: colorsLoading, error: colorsError } = useColors();
 
     useEffect(() => {
-        const email = sessionStorage.getItem('email');
+        const email = localStorage.getItem('email');
         if (email) {
             setProduct((prevProduct) => ({ ...prevProduct, adminEmail: email }));
         }

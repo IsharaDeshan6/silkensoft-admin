@@ -22,7 +22,7 @@ const useSignIn = () => {
                 if (data.message === "success") {
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('userType', data.userType);
-                    sessionStorage.setItem('email', email);
+                    localStorage.setItem('email', email);
                     setOpenVerifyDialog(true);
 
                     if (rememberMe) {
