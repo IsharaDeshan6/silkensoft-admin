@@ -19,7 +19,6 @@ const useSignIn = () => {
 
             if (response.ok) {
                 const data = await response.json();
-                console.log(data);
                 if (data.message === "success") {
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('userType', data.userType);
