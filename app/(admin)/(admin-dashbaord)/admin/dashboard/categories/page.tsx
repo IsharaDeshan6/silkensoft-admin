@@ -105,7 +105,7 @@ const Page =()=> {
                                     <TableCell>{category.name}</TableCell>
                                     <TableCell>
                                         <Avatar>
-                                            <AvatarImage src={`http://localhost:8080/SilkenSoft/images/categories/${category.name}.jpg?timestamp=${Date.now()}`} alt={category.name} />
+                                            <AvatarImage src={`${process.env.NEXT_PUBLIC_API_URL}images/categories/${category.name}.jpg?timestamp=${Date.now()}`} alt={category.name} />
                                         </Avatar>
                                     </TableCell>
                                 </TableRow>

@@ -56,7 +56,7 @@ export default function UsersPage() {
                                 <TableRow key={user.id}>
                                     <TableCell>
                                         <Avatar>
-                                            <AvatarImage src={`http://localhost:8080/SilkenSoft/images/users/${user.id}/avatar.jpg?timestamp=${Date.now()}`} alt={user.username} />
+                                            <AvatarImage src={`${process.env.NEXT_PUBLIC_API_URL}images/users/${user.id}/avatar.jpg?timestamp=${Date.now()}`} alt={user.username} />
                                         </Avatar>
                                     </TableCell>
                                     <TableCell>

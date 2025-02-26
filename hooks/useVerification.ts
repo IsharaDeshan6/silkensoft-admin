@@ -19,6 +19,7 @@ const useVerification = () => {
             });
 
             const data = await response.json();
+            console.log(data);
             if (data.message === "Account verified successfully") {
                 setOpenVerifyDialog(false);
                 router.push('/admin/dashboard');

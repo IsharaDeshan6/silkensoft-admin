@@ -24,7 +24,7 @@ export function RecentSales() {
                     {orders.map((order) => (
                         <div key={order.id} className="flex items-center gap-4">
                             <Avatar className="hidden sm:flex h-9 w-9">
-                                <AvatarImage src={`http://localhost:8080/SilkenSoft/images/users/${order.user.id}/avatar.jpg?timestamp=${Date.now()}`}  alt="Avatar Image" />
+                                <AvatarImage src={`${process.env.NEXT_PUBLIC_API_URL}images/users/${order.user.id}/avatar.jpg?timestamp=${Date.now()}`}  alt="Avatar Image" />
                                 <AvatarFallback>{order.user.fname[0]}{order.user.lname[0]}</AvatarFallback>
                             </Avatar>
                             <div className="grid gap-1">

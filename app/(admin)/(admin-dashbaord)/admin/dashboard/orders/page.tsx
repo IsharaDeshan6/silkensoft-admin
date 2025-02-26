@@ -94,7 +94,7 @@ export default function OrdersPage() {
                                             <Card key={item.id} className="mb-4">
                                                 <CardContent className="flex items-center gap-x-2 justify-start pt-4">
                                                         <Image
-                                                            src={`http://localhost:8080/SilkenSoft/images/clothes/${item.product.id}/img1.jpg?timestamp=${Date.now()}`}
+                                                            src={`${process.env.NEXT_PUBLIC_API_URL}images/clothes/${item.product.id}/img1.jpg?timestamp=${Date.now()}`}
                                                             alt={item.product.title}
                                                             className="w-16 h-16 object-contain mr-2"
                                                             width={16}

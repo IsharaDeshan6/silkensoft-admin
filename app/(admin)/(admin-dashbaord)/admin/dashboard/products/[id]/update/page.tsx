@@ -57,8 +57,8 @@ export default function ProductUpdateRoute() {
                 adminEmail: fetchedProduct.user.email || ""
             });
             setImagePreviews([
-                `http://localhost:8080/SilkenSoft/images/clothes/${fetchedProduct.id}/img1.jpg?timestamp=${Date.now()}`,
-                `http://localhost:8080/SilkenSoft/images/clothes/${fetchedProduct.id}/img2.jpg?timestamp=${Date.now()}`
+                `${process.env.NEXT_PUBLIC_API_URL}images/clothes/${fetchedProduct.id}/img1.jpg?timestamp=${Date.now()}`,
+                `${process.env.NEXT_PUBLIC_API_URL}images/clothes/${fetchedProduct.id}/img2.jpg?timestamp=${Date.now()}`
             ]);
         }
     }, [fetchedProduct]);

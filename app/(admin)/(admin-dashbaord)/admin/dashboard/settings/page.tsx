@@ -26,7 +26,7 @@ export default function AdminSettingsPage() {
 
     useEffect(() => {
         if (adminDetails) {
-            setAvatar(adminDetails.admin_has_avatar ? `http://localhost:8080/SilkenSoft/images/admin/admin.jpg?timestamp=${Date.now()}` : "https://github.com/shadcn.png");
+            setAvatar(adminDetails.admin_has_avatar ? `${process.env.NEXT_PUBLIC_API_URL}images/admin/admin.jpg?timestamp=${Date.now()}` : "https://github.com/shadcn.png");
             setAdmin({
                 firstName: adminDetails.fname,
                 lastName: adminDetails.lname,

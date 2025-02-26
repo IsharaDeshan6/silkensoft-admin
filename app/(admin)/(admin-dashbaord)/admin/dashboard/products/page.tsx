@@ -74,7 +74,7 @@ export default function ProductsRoute() {
                     <TableRow key={product.id}>
                       <TableCell>
 
-                          <Image src={`http://localhost:8080/SilkenSoft/images/clothes/${product.id}/img1.jpg`}
+                          <Image src={`${process.env.NEXT_PUBLIC_API_URL}images/clothes/${product.id}/img1.jpg`}
                                  alt={product.title}
                                  className="w-20 h-20 object-contain mr-2"
                                  width={20}
